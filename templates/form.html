@@ -4,7 +4,24 @@
 {% import "bootstrap/wtf.html" as wtf %}
 <div class="container">
 <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
-{{ wtf.quick_form(form) }}
+{{ form.csrf_token() }}
+ <d1>
+     <p>
+   {{ wtf.form_field(form.username, class='form-control')}}
+         </p><p>
+   {{ wtf.form_field(form.school, class='form-control' )}}
+     </p><p>
+     {{ wtf.form_field(form.class_no, class='form-control' )}}
+     </p><p>
+     {{ wtf.form_field(form.class_letter, class='form-control' )}}
+     </p><p>
+     {{ wtf.form_field(form.remember, class='form-control' )}}
+     </p><p>
+     {{ wtf.form_field(form.photo, class='form-control' )}}
+ </p>
+ </d1>
+ <p>{{ wtf.form_field(form.submit, class='form-control' )}}</p>
+
 </form>
     </div>
   {% endblock %}
