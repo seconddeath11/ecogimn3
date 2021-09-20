@@ -7,7 +7,7 @@ PWD = "Polyana764830"
 def send_email(form, mail):
 
     msg = Message(
-        form.school.data + " " + form.class_no.data + form.class_letter.data,
+        str(form.school.data) + " " + str(form.class_no.data) + str(form.class_letter.data),
         sender=USERNAME,
         recipients=["ecogimn@bk.ru"])
     msg.body = form.username.data + ""

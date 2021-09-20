@@ -3,12 +3,14 @@
  {% block content %}
  <div id="image-map">
   <img width="900" usemap="#mapAreas" src="https://sun9-32.userapi.com/impg/h5NRqyb9BZsr_xNwQuZxJZI9jlQNBZGW3RNe0Q/5lCOjCJhOBM.jpg?size=1600x1126&quality=96&sign=94eb4c1c8a70996f58ca4a83d83277fe&type=album">
-  {%for pin in pins%}
+{% set count = namespace(value=1) %}
+     {%for pin in pins%}
     <div class={% if pin.no > 2 %}"pin pin-down" {% else %}"pin pin-up"{% endif %} data-xpos={{pin.x}} data-ypos={{pin.y}}>
       <h2>{{ pin.station_name }}</h2>
       <ul>
       {%for action in pin.actions%}
-        <li>{{ action }}</li>
+          <li><a href="{{ url_for('form', num = count.value )}}">{{ action }}</a></li>
+            {% set count.value = count.value + 1 %}
       {% endfor %}
       </ul>
       <a href="/form">Отправить заявку</a>

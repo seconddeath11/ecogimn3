@@ -19,14 +19,14 @@ $(document).ready(function(){
 
         // append the tooltip
         $("#image-map").append("<div style='left:"+$(".pin").eq(i).data('xpos')+"px;top:"+$(".pin").eq(i).data('ypos')+"px' class='" + tooltipDirection +"'>\
-                                            <div class='tooltip'>" + $(".pin").eq(i).html() + "</div>\
+                                            <div class='toolti'>" + $(".pin").eq(i).html() + "</div>\
                                     </div>");
     }
 
     // show/hide the tooltip
     $('.tooltip-up, .tooltip-down').mouseenter(function(){
-                $(this).children('.tooltip').fadeIn(100);
+                $(this).children('.toolti').fadeIn(100);
             }).mouseleave(function(){
-                $(this).children('.tooltip').fadeOut(100);
+                $(this).children('.toolti').fadeOut(100);
             })
 });
