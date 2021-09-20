@@ -7,6 +7,9 @@
 {{ form.csrf_token() }}
  <d1>
      <p>
+     {{ wtf.form_field(form.actions, class='form-control' )}}
+ </p>
+     <p>
    {{ wtf.form_field(form.username, class='form-control')}}
          </p><p>
    {{ wtf.form_field(form.school, class='form-control' )}}

@@ -1,9 +1,26 @@
  {% extends 'base.html' %}
  {% block title %} Экомарафон{% endblock %}
  {% block content %}
- <div id="Results">
-  <h3>Contact</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
-  <p id="showData"></p>
-</div>
+ <div class="container">
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+    </tr>
+  </thead>
+  <tbody>
+  {%for res in results%}
+  {%if res.num|int > 0%}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{res.cl}}</td>
+      <td>{{res.num}}</td>
+    </tr>
+  {% endif %}
+  {% endfor %}
+  </tbody>
+  </table>
+ </div>
   {% endblock %}

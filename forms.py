@@ -10,6 +10,7 @@ class Form(FlaskForm):
     school = SelectField('Школа', choices=[('Гимназия 3', 'Гимназия 3'), ('СШ №11', 'СШ №11')])
     class_no = IntegerField('Номер класса', validators=[DataRequired()])
     class_letter = SelectField('Буква класса', choices=[('А', 'A'), ('Б', 'Б')])
+    actions = SelectField()
     remember = BooleanField('Согласие на ')
     photo = MultipleFileField('Прикрепить фото')
     submit = SubmitField('Отправить')

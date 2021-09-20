@@ -20,6 +20,8 @@ app.config['MAIL_PASSWORD'] = PWD
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
+
+
 # TODO: check security stuff
 
 # TODO: fix navbar
@@ -39,10 +41,12 @@ def index():
 @app.route('/form/<num>', methods=['GET', 'POST'])
 def form(num):
     forms = Form()
+    actions = create_actions()
+    forms.actions.choices = actions
     if forms.validate_on_submit():
         send_email(forms, mail)
         return redirect('/success')
-    print(forms.errors)
+    forms.actions.data = num
     return render_template('form.html', form=forms, num=num)
 
 
@@ -52,16 +56,30 @@ def success():
     return render_template("success.html")
 
 
-# TODO: add results
 @app.route("/results")
 def results():
-    return render_template("results.html")
+    with open('static/results.json', encoding='utf-8') as json_file:
+        res = json.load(json_file)
+    return render_template("results.html", results=res)
 
 
 # TODO: fix styles
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")
+
+
+def create_actions():
+    actions = []
+    with open('static/pins.json', encoding='utf-8') as json_file:
+        pins = json.load(json_file)
+    i = 1
+    for pin in pins["station"]:
+
+        for action in pin["actions"]:
+            actions.append((i, action))
+            i += 1
+    return actions
 
 
 # TODO: add announcement
