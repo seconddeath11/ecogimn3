@@ -8,7 +8,6 @@ from werkzeug.utils import redirect
 from forms import Form
 from mail import send_email
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'any secret string'
 bootstrap = Bootstrap(app)
