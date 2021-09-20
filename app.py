@@ -7,8 +7,9 @@ from werkzeug.utils import redirect
 
 from forms import Form
 from mail import send_email
-
-
+# TODO: move config somewhere
+USERNAME = "stels270799@gmail.com"
+PWD = "Polyana764830"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'any secret string'
 bootstrap = Bootstrap(app)
