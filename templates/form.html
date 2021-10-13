@@ -2,28 +2,34 @@
  {% block title %} Экомарафон{% endblock %}
  {% block content %}
 {% import "bootstrap/wtf.html" as wtf %}
-<div class="container">
+<div class="container col-8 mt-4">
 <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
 {{ form.csrf_token() }}
  <d1>
-     <p>
-     {{ wtf.form_field(form.actions, class='form-control' )}}
- </p>
-     <p>
-   {{ wtf.form_field(form.username, class='form-control')}}
-         </p><p>
-   {{ wtf.form_field(form.school, class='form-control' )}}
-     </p><p>
-     {{ wtf.form_field(form.class_no, class='form-control' )}}
-     </p><p>
-     {{ wtf.form_field(form.class_letter, class='form-control' )}}
-     </p><p>
-     {{ wtf.form_field(form.remember, class='form-control' )}}
-     </p><p>
-     {{ wtf.form_field(form.photo, class='form-control' )}}
- </p>
+     {{ wtf.form_field(form.actions)}}
+
+   {{ wtf.form_field(form.username)}}
+
+
+<div class="row d-flex justify-content-between">
+    <div class="col-md-5">
+        {{ wtf.form_field(form.school )}}
+    </div>
+    <div class="col-md-3">
+     {{ wtf.form_field(form.class_no )}}
+    </div>
+    <div class="col-md-3">
+     {{ wtf.form_field(form.class_letter )}}
+    </div>
+</div>
+     {{ wtf.form_field(form.comment )}}
+
+     {{ wtf.form_field(form.remember )}}
+
+     {{ wtf.form_field(form.photo )}}
+
  </d1>
- <p>{{ wtf.form_field(form.submit, class='form-control' )}}</p>
+ {{ wtf.form_field(form.submit, class="btn btn-primary")}}
 
 </form>
     </div>

@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+ {% extends 'base.html' %}
+ {% block title %} Обратная связь{% endblock %}
+ {% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+ <div class="container col-8 mt-4">
+  <h2>Форма обратной связи</h2>
+  <form action="{{ url_for('contact') }}" method=post>
+    {{ form.hidden_tag() }}
+
+    {{ wtf.form_field(form.name) }}
+
+    {{ wtf.form_field(form.email) }}
+
+    {{ wtf.form_field(form.subject) }}
+
+    {{ wtf.form_field(form.message) }}
+
+    {{ wtf.form_field(form.submit, class="btn btn-primary") }}
+  </form>
+     </div>
+{% endblock %}

@@ -1,13 +1,20 @@
  {% extends 'base.html' %}
  {% block title %} Экомарафон{% endblock %}
  {% block content %}
+ {% import "bootstrap/wtf.html" as wtf %}
+ <div class="container">
+     <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
+          {{ resform.school(onchange="this.form.submit()") }}
+     </form>
+ </div>
+ {%if results%}
  <div class="container">
   <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
+      <th scope="col"></th>
+      <th scope="col">Класс</th>
+      <th scope="col">Балл</th>
     </tr>
   </thead>
   <tbody>
@@ -23,4 +30,5 @@
   </tbody>
   </table>
  </div>
+ {% endif %}
   {% endblock %}

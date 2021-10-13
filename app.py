@@ -1,33 +1,22 @@
 import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail
 from werkzeug.utils import redirect
 
-from forms import Form
-from mail import send_email
-
-# TODO: move config somewhere
+from forms import SendForm, ContactForm, ResultsForm
+from mail import send_email, send_question
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'any secret string'
+app.config.from_pyfile('config.py')
 bootstrap = Bootstrap(app)
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = USERNAME
-app.config['MAIL_PASSWORD'] = PWD
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 
 # TODO: check security stuff
 
-# TODO: fix navbar
 # TODO: fix styles for links
-# TODO: fix position for pins up
-# TODO: add instruction
 @app.route("/")
 def index():
     with open('static/pins.json', encoding='utf-8') as json_file:
@@ -36,34 +25,56 @@ def index():
     return render_template("index.html", len=len(pins['station']), pins=pins['station'])
 
 
-# TODO: check validations
-# TODO: add a field
 @app.route('/form/<num>', methods=['GET', 'POST'])
 def form(num):
-    forms = Form()
+    forms = SendForm(class_no=11)
     actions = create_actions()
     forms.actions.choices = actions
     if forms.validate_on_submit():
-        send_email(forms, mail)
+        send_email(forms, mail, actions)
         return redirect('/success')
     forms.actions.data = num
     return render_template('form.html', form=forms, num=num)
 
 
-# TODO: fix styles
 @app.route("/success")
 def success():
     return render_template("success.html")
 
 
-@app.route("/results")
-def results():
-    with open('static/results.json', encoding='utf-8') as json_file:
-        res = json.load(json_file)
-    return render_template("results.html", results=res)
+# TODO: add instruction
+# TODO: fix styles
+@app.route("/rules")
+def rules():
+    return render_template("rules.html")
+
+
+@app.route("/pam")
+def pam():
+    return render_template("pam.html")
 
 
 # TODO: fix styles
+@app.route("/results", methods=['GET', 'POST'])
+def results():
+    res_form = ResultsForm()
+    with open('static/results.json', encoding='utf-8') as json_file:
+        res = json.load(json_file)
+    if request.method == 'POST':
+        return render_template("results.html", resform=res_form, results=res[res_form.school.data])
+    else:
+        return render_template("results.html", resform=res_form, results=res['gimn3'])
+
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form_q = ContactForm()
+    if form_q.validate_on_submit():
+        send_question(form_q, mail)
+        return redirect('/success')
+    return render_template('contact.html', form=form_q)
+
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")
@@ -82,6 +93,5 @@ def create_actions():
     return actions
 
 
-# TODO: add announcement
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')

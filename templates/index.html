@@ -1,14 +1,20 @@
  {% extends 'base.html' %}
- {% block title %} Экомарафон{% endblock %}
+ {% block title %} ЭкоМарафон{% endblock %}
  {% block content %}
- <div class="container">
-     <p>hello!</p>
+ <div class="container mt-4">
+     <h2 class="text-center">ЭкоМарафон 2021-2022</h2>
+     <h5 class="text-center">Поможем планете вместе!</h5>
+     <p class="text-center">Начните свой экозабег со "Старта", далее выберите нужную станцию и категорию.</p>
  </div>
  <div id="image-map">
-  <img width="900" usemap="#mapAreas" src="https://sun9-32.userapi.com/impg/h5NRqyb9BZsr_xNwQuZxJZI9jlQNBZGW3RNe0Q/5lCOjCJhOBM.jpg?size=1600x1126&quality=96&sign=94eb4c1c8a70996f58ca4a83d83277fe&type=album">
-{% set count = namespace(value=1) %}
+  <img width="900" height="633" src="https://sun9-32.userapi.com/impg/h5NRqyb9BZsr_xNwQuZxJZI9jlQNBZGW3RNe0Q/5lCOjCJhOBM.jpg?size=1600x1126&quality=96&sign=94eb4c1c8a70996f58ca4a83d83277fe&type=album">
+<div class="pin pin-up" data-xpos="77" data-ypos="55">
+    <h2>Старт</h2>
+    <p>Перед участием в марафоне ознакомьтесь с <a href="{{ url_for('rules')}}">правилами</a></p>
+</div>
+     {% set count = namespace(value=1) %}
      {%for pin in pins%}
-    <div class={% if pin.no > 2 %}"pin pin-down" {% else %}"pin pin-up"{% endif %} data-xpos={{pin.x}} data-ypos={{pin.y}}>
+    <div class={% if (pin.no > 2)  and (pin.no != 4) %}"pin pin-down" {% else %}"pin pin-up"{% endif %} data-xpos={{pin.x}} data-ypos={{pin.y}}>
       <h2>{{ pin.station_name }}</h2>
       <ul>
       {%for action in pin.actions%}
@@ -16,8 +22,9 @@
             {% set count.value = count.value + 1 %}
       {% endfor %}
       </ul>
-      <a href="/form">Отправить заявку</a>
     </div>
   {% endfor %}
+
 </div>
+
  {% endblock %}
