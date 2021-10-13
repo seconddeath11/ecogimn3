@@ -1,0 +1,6 @@
+flask
+flask_mail
+flask_wtf
+wtforms
+gunicorn==20.0.4
+flask-bootstrap
