@@ -1,10 +1,11 @@
 from flask_mail import Message
+from boto.s3.connection import S3Connection
 
 
 def send_email(form, mail, actions):
     msg = Message(
         "Новое дело",
-        sender=USERNAME,
+        sender=S3Connection(os.environ['USERNAME']),
         recipients=["ecogimn@bk.ru"])
     msg.body = form.username.data + "\n Сделали: " + actions[int(form.actions.data) - 1][
         1] + "\n Школа и класс: " + str(dict(form.school.choices)[form.school.data]) + ", " + str(
