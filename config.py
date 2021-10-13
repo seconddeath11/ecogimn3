@@ -1,3 +1,5 @@
+import os
+
 from boto.s3.connection import S3Connection
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465

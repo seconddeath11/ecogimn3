@@ -1,3 +1,5 @@
+import os
+
 from flask_mail import Message
 from boto.s3.connection import S3Connection
 
