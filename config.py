@@ -7,5 +7,5 @@ MAIL_PASSWORD = os.getenv('PASSWORD')
 SECRET_KEY = os.getenv("SECRET_KEY")
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
-SERVER_NAME = 'ecogimn.pythonanywhere.com'
+#SERVER_NAME = 'ecogimn.pythonanywhere.com'
 WTF_CSRF_ENABLED = False
