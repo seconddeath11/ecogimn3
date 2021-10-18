@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import MultipleFileField, TextAreaField
+from flask_wtf.file import FileRequired
+from wtforms import MultipleFileField, TextAreaField, DateField
 from wtforms import StringField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, Optional
 
@@ -12,9 +13,10 @@ class SendForm(FlaskForm):
     class_no = SelectField('Номер класса', choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
     class_letter = SelectField('Буква класса', choices=[('А', 'A'), ('Б', 'Б'), ('В', 'В'), ('Г', 'Г'), ('Д', 'Д')])
     actions = SelectField('Выбранное действие')
+    date = DateField('Дата участия', format='%d-%m-%Y')
     comment = TextAreaField('Ваш комментарий', validators=[Optional()])
     remember = BooleanField('Согласие на использование информации на сайте гимназии и в группе ВК')
-    photo = MultipleFileField('Прикрепить фото', validators=[Optional()])
+    photo = MultipleFileField('Прикрепить фото', validators=[FileRequired()])
     submit = SubmitField('Отправить')
 
 
