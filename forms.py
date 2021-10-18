@@ -16,7 +16,7 @@ class SendForm(FlaskForm):
     date = DateField('Дата участия', format='%d-%m-%Y')
     comment = TextAreaField('Ваш комментарий', validators=[Optional()])
     remember = BooleanField('Согласие на использование информации на сайте гимназии и в группе ВК')
-    photo = MultipleFileField('Прикрепить фото', validators=[FileRequired()])
+    photo = MultipleFileField('Прикрепить фото', validators=[DataRequired(message=ob)])
     submit = SubmitField('Отправить')
 
 
