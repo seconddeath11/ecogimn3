@@ -2,9 +2,12 @@
  {% block title %} Экомарафон{% endblock %}
  {% block content %}
  {% import "bootstrap/wtf.html" as wtf %}
- <div class="container">
+ <div class="container col-md-4 mt-4">
      <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
-          {{ resform.school(onchange="this.form.submit()") }}
+         <d1>
+             {{ wtf.form_field(resform.school, onchange="this.form.submit()") }}
+         </d1>
+
      </form>
  </div>
  {%if results%}

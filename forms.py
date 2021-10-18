@@ -27,4 +27,4 @@ class ContactForm(FlaskForm):
 
 
 class ResultsForm(FlaskForm):
-    school = SelectField(choices=[('gimn3', 'Гимназия 3'), ('sc51', 'СШ №11')])
+    school = SelectField("Выберите вашу школу:", choices=[('gimn3', 'Гимназия 3'), ('sc51', 'СШ №11')])

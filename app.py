@@ -16,9 +16,6 @@ mail = Mail(app)
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
-# TODO: check security stuff
-
-# TODO: fix styles for links
 @app.route("/")
 def index():
     with open(os.path.join(THIS_FOLDER, 'static/pins.json'), encoding='utf-8') as json_file:
@@ -45,7 +42,6 @@ def success():
 
 
 # TODO: add instruction
-# TODO: fix styles
 @app.route("/rules")
 def rules():
     return render_template("rules.html")
@@ -56,7 +52,11 @@ def pam():
     return render_template("pam.html")
 
 
-# TODO: fix styles
+@app.route("/sc11")
+def sc11():
+    return render_template("sc11.html")
+
+
 @app.route("/results", methods=['GET', 'POST'])
 def results():
     res_form = ResultsForm()
