@@ -1,4 +1,5 @@
 import json
+import os
 
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 bootstrap = Bootstrap(app)
 mail = Mail(app)
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
 # TODO: check security stuff
@@ -19,7 +21,7 @@ mail = Mail(app)
 # TODO: fix styles for links
 @app.route("/")
 def index():
-    with open('static/pins.json', encoding='utf-8') as json_file:
+    with open(os.path.join(THIS_FOLDER, 'static/pins.json'), encoding='utf-8') as json_file:
         pins = json.load(json_file)
 
     return render_template("index.html", len=len(pins['station']), pins=pins['station'])
@@ -58,7 +60,7 @@ def pam():
 @app.route("/results", methods=['GET', 'POST'])
 def results():
     res_form = ResultsForm()
-    with open('static/results.json', encoding='utf-8') as json_file:
+    with open(os.path.join(THIS_FOLDER, 'static/results.json'), encoding='utf-8') as json_file:
         res = json.load(json_file)
     if request.method == 'POST':
         return render_template("results.html", resform=res_form, results=res[res_form.school.data])
@@ -82,7 +84,7 @@ def not_found(e):
 
 def create_actions():
     actions = []
-    with open('static/pins.json', encoding='utf-8') as json_file:
+    with open(os.path.join(THIS_FOLDER, 'static/pins.json'), encoding='utf-8') as json_file:
         pins = json.load(json_file)
     i = 1
     for pin in pins["station"]:
@@ -91,6 +93,3 @@ def create_actions():
             actions.append((i, action))
             i += 1
     return actions
-
-
-
