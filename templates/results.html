@@ -21,10 +21,12 @@
     </tr>
   </thead>
   <tbody>
+  {% set count = namespace(value=0) %}
   {%for res in results%}
   {%if res.num|int > 0%}
+  {% set count.value = count.value + 1 %}
     <tr>
-      <th scope="row">{{loop.index}}</th>
+      <th scope="row">{{count.value}}</th>
       <td>{{res.cl}}</td>
       <td>{{res.num}}</td>
     </tr>
