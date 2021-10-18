@@ -6,7 +6,7 @@ from flask_mail import Message
 def send_email(form, mail, actions):
     msg = Message(
         "Новое дело",
-        sender=os.environ['USERNAME'],
+        sender=os.getenv('USERNAME'),
         recipients=["ecogimn@bk.ru"])
     msg.body = form.username.data + "\n Сделали: " + actions[int(form.actions.data) - 1][
         1] + "\n Школа и класс: " + str(dict(form.school.choices)[form.school.data]) + ", " + str(
@@ -24,7 +24,7 @@ def send_email(form, mail, actions):
 def send_question(form, mail):
     msg = Message(
         "Новый вопрос по теме " + form.subject.data,
-        sender=os.environ['USERNAME'],
+        sender=os.getenv('USERNAME'),
         recipients=["ecogimn@bk.ru"])
     msg.body = "имя: " + form.name.data + "\nпочта: " + form.email.data + "\nвопрос: " + form.message.data
     mail.send(msg)
